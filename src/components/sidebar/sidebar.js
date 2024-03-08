@@ -5,7 +5,7 @@ import {
   faPlus,
   faQuestion,
   faDoorOpen,
-  faUser
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -27,8 +27,10 @@ const sidebar = () => {
           </li>
 
           <li className=" cursor-pointer flex h-10 items-center px-4 hover:bg-slate-500 hover:text-white rounded-md">
-            <FontAwesomeIcon icon={faPlus} size="lg" />
-            <span className="ml-4">Add Product</span>
+            <Link href="/addProduct">
+              <FontAwesomeIcon icon={faPlus} size="lg" />
+              <span className="ml-4">Add Product</span>
+            </Link>
           </li>
 
           <li className="flex cursor-pointer h-10 items-center px-4 hover:bg-slate-500 hover:text-white rounded-md">
