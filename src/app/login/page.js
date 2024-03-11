@@ -16,14 +16,13 @@ const Login = () => {
             <Input
               type="email"
               placeholder="Email"
-              className="w-full focus:border-transparent border p-2 rounded-md "
+              
             />
           </div>
           <div className="mb-4">
             <Input
               type="password"
               placeholder="Password"
-              className="w-full focus:border-transparent border p-2 rounded-md"
             />
           </div>
           <div className="text-center">
