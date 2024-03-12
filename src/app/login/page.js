@@ -1,6 +1,8 @@
-"use client"
+"use client";
 import React from "react";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import Link from "next/link";
 const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,23 +15,17 @@ const Login = () => {
         <h1 className="text-3xl mb-4 text-center font-semibold">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <Input
-              type="email"
-              placeholder="Email"
-              
-            />
+            <Input type="email" placeholder="Email" />
           </div>
           <div className="mb-4">
-            <Input
-              type="password"
-              placeholder="Password"
-            />
+            <Input type="password" placeholder="Password" />
           </div>
           <div className="text-center">
             <button className="bg-slate-600 text-white px-4 py-2 rounded-md hover:bg-slate-800 transition-colors duration-300">
               Login
             </button>
           </div>
+          <Link className="text-xs flex justify-center mt-4 underline text-cyan-700" href="/register">Don't have an account?</Link>
         </form>
       </div>
     </div>
