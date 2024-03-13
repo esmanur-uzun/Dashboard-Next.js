@@ -1,19 +1,11 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "fullname": "esma nur ",
+      "email": "e@gmail.com",
+      "password": "123",
+      "id": 1
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "products": []
 }
