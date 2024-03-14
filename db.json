@@ -5,6 +5,12 @@
       "email": "e@gmail.com",
       "password": "123",
       "id": 1
+    },
+    {
+      "fullname": "tayyip uzun",
+      "email": "t@gmail.com",
+      "password": "123",
+      "id": 2
     }
   ],
   "products": []
