@@ -9,15 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import {store} from "@/store";
-import { _logout } from "@/store/auth";
+import { store } from "@/store";
+import Logout from "../logout/logout";
 
 const sidebar = () => {
-  const {user} = store.getState().user
-  console.log(user[0])
-  // const handleLogout = () => {
-  //   dispatch(actions.logout()); // logout action creator'ını çağırarak kullanıcıyı log out yapın
-  // };
+  const { user } = store.getState().user;
+  console.log(user[0]);
   return (
     <div className="w-1/6 h-screen fixed bg-slate-800">
       <aside>
@@ -50,7 +47,7 @@ const sidebar = () => {
           </li>
           <li className="flex cursor-pointer h-10 items-center px-4 hover:bg-slate-500 hover:text-white rounded-md">
             <FontAwesomeIcon icon={faDoorOpen} size="lg" />
-            <button className="ml-4">Log Out</button>
+            <Logout/>
           </li>
         </ul>
       </aside>
