@@ -1,28 +1,32 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import Link from "next/link";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation"; // useRouter importu düzeltildi
+
 const Login = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .get(`http://localhost:3001/posts?email=${email}&password=${password}`)
-      .then((login_res) => {
-        if (login_res?.data?.length > 0) {
-          router.push("/")
-        } else {
-          alert("böyle bir kullanıcı bulunamadı");
-        }
-      }).catch(e => console.log(e));
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false, // Sayfayı yenilemeden işlem sonrası yönlendirme için
+    });
+    console.log(result)
+    // if (result?.error) {
+    //   // Giriş hatası varsa işleyin (örneğin, kullanıcıya bir hata mesajı gösterin)
+    //   console.error('Giriş hatası:', result.error);
+    // } else {
+    //   // Başarılı giriş durumunda kullanıcıyı yönlendirin
+    //   router.push('/');
+    // }
   };
-  
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg">
