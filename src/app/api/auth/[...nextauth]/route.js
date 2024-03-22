@@ -12,15 +12,17 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         try {
           // Sahte API'den gelen kullanıcı bilgileri
-          const response = await axios.post("http://localhost:3001/posts", {
-            email: credentials.email,
-            password: credentials.password,
+          const response = await axios.get("http://localhost:3001/posts", {
+            headers: {
+              Authorization: `Basic ${Buffer.from(
+                `${credentials.email}:${credentials.password}`
+              ).toString("base64")}`,
+            },
           });
 
           const user = response.data.user;
           if (user) {
             // Kullanıcı doğrulandıysa, kullanıcı bilgilerini döndür
-            
             return user;
           } else {
             // Kullanıcı doğrulanamazsa null veya false döndür

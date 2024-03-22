@@ -19,13 +19,13 @@ const Login = () => {
       redirect: false, // Sayfayı yenilemeden işlem sonrası yönlendirme için
     });
     console.log(result)
-    // if (result?.error) {
-    //   // Giriş hatası varsa işleyin (örneğin, kullanıcıya bir hata mesajı gösterin)
-    //   console.error('Giriş hatası:', result.error);
-    // } else {
-    //   // Başarılı giriş durumunda kullanıcıyı yönlendirin
-    //   router.push('/');
-    // }
+    if (result?.error) {
+      // Giriş hatası varsa işleyin (örneğin, kullanıcıya bir hata mesajı gösterin)
+      console.error('Giriş hatası:', result.error);
+    } else {
+      // Başarılı giriş durumunda kullanıcıyı yönlendirin
+      router.push('/');
+    }
   };
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">

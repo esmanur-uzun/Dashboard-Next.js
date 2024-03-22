@@ -11,7 +11,39 @@
       "email": "t@gmail.com",
       "password": "123",
       "id": 2
+    },
+    {
+      "email": "e@gmail.com",
+      "password": "123",
+      "id": 3
+    },
+    {
+      "email": "e@gmail.co",
+      "password": "123",
+      "id": 4
     }
   ],
-  "products": []
+  "products": [
+    {
+      "productName": "elma",
+      "description": "fd fd",
+      "price": "33",
+      "stock": "5",
+      "id": 1
+    },
+    {
+      "productName": "elma",
+      "description": "fd fd",
+      "price": "33",
+      "stock": "5",
+      "id": 2
+    },
+    {
+      "productName": "bilgiayar",
+      "description": "asus",
+      "price": "30000",
+      "stock": "20",
+      "id": 3
+    }
+  ]
 }
