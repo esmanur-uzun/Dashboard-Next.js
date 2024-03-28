@@ -1,25 +1,24 @@
-"use client"
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const Product = () => {
-  const [products, setProducts] = useState([]);
+ 
 
-  useEffect(() => {
-    // API'den ürünleri çekmek için axios kullanarak bir GET isteği yapın
-    axios
-      .get("http://localhost:3001/products")
-      .then((response) => {
-        // API'den gelen ürünleri state'e ayarlayın
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Ürünleri alma hatası:", error);
-      });
-  }, []); // Boş bağımlılık dizisi, bileşen yüklendiğinde yalnızca bir kez çağrılmasını sağlar
+  // useEffect(() => {
+  //   // API'den ürünleri çekmek için axios kullanarak bir GET isteği yapın
+  //   axios
+  //     .get("http://localhost:3001/products")
+  //     .then((response) => {
+  //       // API'den gelen ürünleri state'e ayarlayın
+  //       setProducts(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Ürünleri alma hatası:", error);
+  //     });
+  // }, []); // Boş bağımlılık dizisi, bileşen yüklendiğinde yalnızca bir kez çağrılmasını sağlar
 
   return (
     <table className="w-full">
@@ -31,7 +30,7 @@ const Product = () => {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
+        {/* {products.map((product) => (
           <tr key={product.id} className="border-b border-gray-300">
             <td className="p-3 bg-white">{product.name}</td>
             <td className="p-3 bg-gray-300">{product.description}</td>
@@ -44,7 +43,7 @@ const Product = () => {
               </Button>
             </td>
           </tr>
-        ))}
+        ))} */}
       </tbody>
     </table>
   );
