@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Register = () => {
   const router = useRouter()
-  const [fullname, setFullName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // Hata durumu için bir state tanımlanır
@@ -16,20 +16,20 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/posts", { fullname, email, password })
+      .post("http://localhost:5000/api/register", { fullName, email, password })
       .then((register_response) => {
         console.log(register_response);
         router.push("/login");
       })
       .catch((error) => {
-        setError(error.message || "An error occurred");
+        setError(error.message);
       });
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg">
-        {error && ( // Hata durumu varsa, alert bileşeni görüntülenir
+        {error && ( 
           <Alert variant="destructive" className="mb-4">
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>{error}</AlertDescription>
@@ -40,7 +40,7 @@ const Register = () => {
           <div className="mb-4">
             <Input
               type="text"
-              value={fullname}
+              value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Full Name"
               required

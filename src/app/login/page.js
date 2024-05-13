@@ -2,31 +2,32 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation"; // useRouter importu düzeltildi
 
 const Login = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false, // Sayfayı yenilemeden işlem sonrası yönlendirme için
-    });
-    console.log(result)
-    if (result?.error) {
-      // Giriş hatası varsa işleyin (örneğin, kullanıcıya bir hata mesajı gösterin)
-      console.error('Giriş hatası:', result.error);
-    } else {
-      // Başarılı giriş durumunda kullanıcıyı yönlendirin
-      router.push('/');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result.error) {
+        console.error("Login failed:", result.error);
+      } else {
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
+
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg">

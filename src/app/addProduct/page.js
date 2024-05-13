@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import axios from "axios";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; 
-
+import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -13,10 +12,13 @@ const AddProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const priceAsNumber = parseFloat(price);
+    const stockAsNumber = parseFloat(stock);
     axios
-      .post("http://localhost:3001/products", {productName, description, price, stock })
+      .post("http://localhost:5000/api/product", {productName, description,priceAsNumber, stockAsNumber})
       .then((product_response) => {
         console.log(product_response);
+        console.log(price);
         router.push("/product");
       })
       .catch((error) => {
@@ -29,7 +31,12 @@ const AddProduct = () => {
       <div className="w-full md:w-2/3 lg:w-1/2 xl:w-2/4 bg-slate-300 p-8 rounded-lg">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="productName" className="block text-gray-700 font-bold mb-2">Product Name:</label>
+            <label
+              htmlFor="productName"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Product Name:
+            </label>
             <input
               type="text"
               id="productName"
@@ -40,7 +47,12 @@ const AddProduct = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="block text-gray-700 font-bold mb-2">Description:</label>
+            <label
+              htmlFor="description"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Description:
+            </label>
             <textarea
               id="description"
               className="form-textarea w-full"
@@ -50,7 +62,12 @@ const AddProduct = () => {
             ></textarea>
           </div>
           <div className="mb-4">
-            <label htmlFor="price" className="block text-gray-700 font-bold mb-2">Price:</label>
+            <label
+              htmlFor="price"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Price:
+            </label>
             <input
               type="number"
               id="price"
@@ -61,7 +78,12 @@ const AddProduct = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="stock" className="block text-gray-700 font-bold mb-2">Stock:</label>
+            <label
+              htmlFor="stock"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Stock:
+            </label>
             <input
               type="number"
               id="stock"
@@ -71,7 +93,12 @@ const AddProduct = () => {
               required
             />
           </div>
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300">Submit</button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>

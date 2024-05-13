@@ -11,25 +11,19 @@ const handler = NextAuth({
       name: "credentials",
       async authorize(credentials, req) {
         try {
-          // Sahte API'den gelen kullanıcı bilgileri
-          const response = await axios.get("http://localhost:3001/posts", {
-            headers: {
-              Authorization: `Basic ${Buffer.from(
-                `${credentials.email}:${credentials.password}`
-              ).toString("base64")}`,
-            },
-          });
-
-          const user = response.data.user;
-          if (user) {
-            // Kullanıcı doğrulandıysa, kullanıcı bilgilerini döndür
-            return user;
-          } else {
-            // Kullanıcı doğrulanamazsa null veya false döndür
-            return null;
+          const { email, password } = credentials;
+          let user = null
+          await axios.post("http://localhost:5000/api/login", {
+            email,
+            password
+          }).then((data_res)=>{
+           user = data_res
+          })
+          if(user){
+            return user
           }
+          
         } catch (error) {
-          console.error("Kimlik doğrulama hatası:", error);
           return null;
         }
       },

@@ -1,25 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const Product = () => {
- 
-
-  // useEffect(() => {
-  //   // API'den ürünleri çekmek için axios kullanarak bir GET isteği yapın
-  //   axios
-  //     .get("http://localhost:3001/products")
-  //     .then((response) => {
-  //       // API'den gelen ürünleri state'e ayarlayın
-  //       setProducts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Ürünleri alma hatası:", error);
-  //     });
-  // }, []); // Boş bağımlılık dizisi, bileşen yüklendiğinde yalnızca bir kez çağrılmasını sağlar
-
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/product")
+      .then((product_res) => {
+        setProducts(product_res.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
   return (
     <table className="w-full">
       <thead>
@@ -30,9 +27,9 @@ const Product = () => {
         </tr>
       </thead>
       <tbody>
-        {/* {products.map((product) => (
-          <tr key={product.id} className="border-b border-gray-300">
-            <td className="p-3 bg-white">{product.name}</td>
+        {products.map((product) => (
+          <tr key={product._id} className="border-b border-gray-300">
+            <td className="p-3 bg-white">{product.productName}</td>
             <td className="p-3 bg-gray-300">{product.description}</td>
             <td className="p-3 flex gap-2 justify-center items-center">
               <Button variant="destructive">
@@ -43,7 +40,7 @@ const Product = () => {
               </Button>
             </td>
           </tr>
-        ))} */}
+        ))}
       </tbody>
     </table>
   );
