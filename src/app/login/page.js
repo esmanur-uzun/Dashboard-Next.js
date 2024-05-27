@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import axios from "axios";
+import { setCookie } from "cookies-next";
+import { ToastAction } from "@/components/ui/toast"
+import { toast, useToast } from "@/components/ui/use-toast"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,17 +16,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-      if (result.error) {
-        console.error("Login failed:", result.error);
-      } else {
-        router.push("/");
+      const result = await axios.post("http://localhost:5000/api/login",{email,password})
+      if(result){
+        setCookie('accessToken',result.data.token)
+        router.push("/")
       }
     } catch (error) {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: {error},
+        // action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
       console.error("Login failed:", error);
     }
   };
