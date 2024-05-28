@@ -11,11 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import {  useSession } from "next-auth/react";
 
 const sidebar = () => {
   const [open, setOpen] = useState(false);
-  const {data : session} = useSession()
 
   const toggleOpen = () => {
     setOpen(!open);
