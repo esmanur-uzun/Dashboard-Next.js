@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   faGear,
   faStore,
@@ -11,13 +11,28 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { isAuthenticated } from "@/app/auth/auth";
 
-const sidebar = () => {
+const Sidebar = () => {
   const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const authStatus = isAuthenticated();
+    setLoggedIn(authStatus);
+  }, []);
 
   const toggleOpen = () => {
     setOpen(!open);
   };
+
+  if (!loggedIn) {
+    return null; 
+  }
+  function logOut(){
+    
+  }
+
   return (
     <div
       className={`${
@@ -61,7 +76,7 @@ const sidebar = () => {
           </li>
           <li className="flex cursor-pointer h-10 items-center px-4 hover:bg-slate-500 hover:text-white rounded-md">
             <FontAwesomeIcon icon={faDoorOpen} size="lg" />
-            <button className={`${!open && "hidden"} ml-4`}>Logout</button>
+            <button onClick={logOut} className={`${!open && "hidden"} ml-4`}>Logout</button>
           </li>
         </ul>
       </aside>
@@ -69,4 +84,4 @@ const sidebar = () => {
   );
 };
 
-export default sidebar;
+export default Sidebar;
