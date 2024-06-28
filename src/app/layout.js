@@ -4,8 +4,9 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Toaster } from "@/components/ui/toaster";
-import { isAuthenticated } from "@/app/auth/auth";
 config.autoAddCss = false;
+import 'formiojs/dist/formio.full.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,9 @@ export default function RootLayout({ children }) {
         <title>{metadata.title}</title>
       </head>
       <body className={inter.className}>
-        <div className="flex">
+        <div className="flex bg-gray-100">
           <div className="w-16">
-            <Sidebar />
+            {/* <Sidebar /> */}
           </div>
           <div className="w-full">
             <main>{children}</main>

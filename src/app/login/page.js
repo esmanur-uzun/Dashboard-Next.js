@@ -5,8 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { setCookie } from "cookies-next";
-import { ToastAction } from "@/components/ui/toast"
-import { toast, useToast } from "@/components/ui/use-toast"
+import { toast } from "@/components/ui/use-toast"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +23,6 @@ const Login = () => {
       }
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
-      console.log(errorMessage);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -34,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+    <div className="min-h-screen  flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h1 className="text-3xl mb-4 text-center font-semibold">Login</h1>
         <form onSubmit={handleSubmit}>

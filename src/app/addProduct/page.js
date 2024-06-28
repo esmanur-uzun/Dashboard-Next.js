@@ -1,28 +1,36 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
+
 import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
   const router = useRouter();
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("");
+  const [priceAsString, setPrice] = useState("");
+  const [stockAsString, setStock] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const priceAsNumber = parseFloat(price);
-    const stockAsNumber = parseFloat(stock);
+    const price = parseFloat(priceAsString);
+    const stock = parseFloat(stockAsString);
+   
     axios
-      .post("http://localhost:5000/api/product", {productName, description,priceAsNumber, stockAsNumber})
+      .post("http://localhost:5000/api/product", {productName, description,price, stock})
       .then((product_response) => {
         console.log(product_response);
         console.log(price);
         router.push("/product");
       })
       .catch((error) => {
-        console.log(error)
+        const errorMessage = error.response?.data?.message || error.message;
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: errorMessage,
+        });
       });
   };
 
@@ -72,8 +80,8 @@ const AddProduct = () => {
               type="number"
               id="price"
               className="form-input w-full"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              value={priceAsString}
+              onChange={(e) => setPrice(e.target.value) }
               required
             />
           </div>
@@ -88,7 +96,7 @@ const AddProduct = () => {
               type="number"
               id="stock"
               className="form-input w-full"
-              value={stock}
+              value={stockAsString}
               onChange={(e) => setStock(e.target.value)}
               required
             />
